@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "utf-8">
+    <title>Random</title>
+    <link rel="stylesheet" href="BL1.css">
+
+    <script>
+      var userStrings =["1. string", "2. string", "3. string", "4. string", "5. string", "6. string", ];
+      var disp_num = 3; // a kijelzett tételek száma (nem lehet kisebb, mint a userStrings[] elemszáma)
+  
+      function allTasks(){
+        getData();
+        dispData();
+        display(disp_num);
+      }
+      function getData(){   // adatok beolvasása
+         for( i=1; i <= userStrings.length; i++ ){
+          userStrings[i-1] = prompt(i+". szöveg:", userStrings[i-1]);
+        }
+      }
+      function dispData(){
+          var szoveg = "<b><u>Kapott sztringek:</u></b> <br>";
+          for(i=0; i<userStrings.length; i++ ){
+            szoveg += userStrings[i] + "<br>";
+          }
+          document.getElementById("adatok").innerHTML = szoveg;
+      }
+
+      function random(max_num) {
+        rnd = Math.random() * (max_num);  //n elem esetén 0...max_num között kapunk értéket
+        rnd = Math.floor(rnd);                // lefelé kerekítünk...
+  // ... de spec esetben ebből lehet max_num is, ami nagyobb, mint a legnagyobb index, 
+  // ilyenkor visszatesszük a max_num-1 -re az értéket
+        if(rnd >= max_num){ 
+          rnd = max_num-1;
+        }
+        return(rnd); 
+      }
+      
+      function display( disp_num){
+        var evalText = "<b><u>Véletlen választások:</u></b> <br>";
+        for(i =0; i<disp_num; i++){
+          idx = random(userStrings.length);
+          evalText += String(idx+1) + ".tétel => " + '"' + userStrings[idx]+ '"' + "<br>"; //összeállítjuk a választ
+        }
+      // kiírjuk választ az erre szolgáló <p id="eredmenyek" ...> -be
+        document.getElementById("eredmenyek").innerHTML = evalText;
+      }
+    </script>
+  </head>
+
+ 
+  <body onload="allTasks()" >
+
+    <div align="center">
+      <h2>Feladat:</h2>
+      <p>"Írjatok egy programot, aminek a bemenete sztringek egy 5-6-7 ilyesmi hosszú listája és ebből visszaad 3 sztringet véletlenszerűen." </p>  
+      <p id="adatok" style="border:solid; width:max-content ; padding: 1em;" > ... </p>
+      <p id="eredmenyek" style="border:solid; width:max-content ; padding: 1em;" > ... </p>
+      <p align="center"> <button type="button" onclick="display(disp_num)">Újragenerál</button></p>
+  </div>
+  <p class="disclaim" >Készítette:Balog Lea</p>
+
+  </body>
+</html>

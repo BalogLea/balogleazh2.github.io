@@ -1,0 +1,49 @@
+body {
+        background-image: url("../img/pexels-henry.gif");
+    } 
+button {
+        background-color: aqua;
+        font-size: 18px;
+        border-top:black;
+        border-radius: 1em;
+        height: 2em;
+    }
+    
+.m_h1 {    
+        font-family: Georgia, "Times New Roman", serif;
+        text-align:center; 
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+.p1 {   font-family: Georgia, "Times New Roman", serif;
+        font-size: 30px;
+    } 
+
+.p2 {   font-family: Verdana, "Times New Roman", sans-serif;
+        font-size: 16px;
+        /* color: gray; */
+    }
+.p_szines {   font-family: Verdana, "Times New Roman", sans-serif;
+        font-size: 16px;
+        background-color:rgba(237, 246, 231, 0.461);
+        width: max-content;
+        border-radius: 1em;
+        padding: 1em;
+        border:solid;
+    }
+.p_szines_pad {   font-family: Verdana, "Times New Roman", sans-serif;
+        font-size: 16px;
+        background-color:rgba(237, 246, 231, 0.461);
+        width: max-content;
+        padding: 2em;
+        /* border: solid;*/
+    }
+
+.disclaim {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+
+    }

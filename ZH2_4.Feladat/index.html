@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+    <meta charset = "utf-8">
+    <title>Termékek</title>
+    <link rel="stylesheet" href="CSS/BL1.css">
+  </head>
+
+  <script>
+    var termekNeve =[];
+    var termekAra =[];
+
+      function calcAll() {
+//beolvassuk a HTML objektumokból az értékeket
+         for( i=0; i<6; i++){
+          termekNeve[i] = document.getElementById("n" + String(i+1)).value;
+          termekAra[i] = parseFloat( document.getElementById("a" + String(i+1)).value);
+        }
+//A legolcsóbb (első legolcsóbb) indexét elkérjük 
+        cheapIdx = getCheapIdx(termekAra);
+// összeállítjuk a választ HTML sortörésekkel
+        evalText = "Az első legolcsóbb termék: " + termekNeve[cheapIdx] + ", ennek ára: " + String(termekAra[cheapIdx] + "<br>");
+        evalText += "Az árak átlaga = " + String(average(termekAra)) +"<br>";
+        evalText += "Az árak szórása = " + String(deviation(termekAra));
+// kiírjuk az eredményt az erre szolgáló <p id="eredmenyek" >-be
+        document.getElementById("eredmenyek").innerHTML = evalText;
+      }
+
+      function getCheapIdx(for_array){ // a tömbből a legkisebb értékű elem indexét keressük
+        var minVal= Math.min(...for_array); 
+        var idx= for_array.indexOf(minVal);
+        return (idx);
+      }
+
+      function average(fn_array){     //átlag számítása (lehetne: avg = fn_array.map(Math.average))
+        var sum = 0;
+        for(i=0;  i < fn_array.length; i++){
+          sum = sum + fn_array[i];
+        }
+        return( sum / fn_array.length )
+      }
+
+      function deviation(fn_array){   //szórás számítása
+        var sum = 0;
+        var avg = average(fn_array);        
+        for(i=0; i < fn_array.length; i++){
+          sum = sum + (avg - fn_array[i])**2;
+        }                                // összegezzük az átlagtól való eltérések négyzeteit
+        sum = sum / fn_array.length;    // eltérés-négyzetek átlaga
+        return(Math.sqrt( sum ));       // visszaadjuk az eltérés-négyzetek átlagának négyzetgyökét
+      }
+  </script>
+
+  <body >
+    <p class="m_h1">Legolcsóbb termék kiválasztása</h1>
+    <p class="p1" align="center">...és elemzés</p>
+
+    <div align="center">
+      <p class="p_szines">
+        1. Termék neve: <input type="text" id="n1" value="a"> Ára: <input type="number" id="a1" value=3><br>
+        2. Termék neve: <input type="text" id="n2" value="b"> Ára: <input type="number" id="a2" value=5><br>
+        3. Termék neve: <input type="text" id="n3" value="c"> Ára: <input type="number" id="a3" value=2><br>
+        4. Termék neve: <input type="text" id="n4" value="d"> Ára: <input type="number" id="a4" value=4><br>
+        5. Termék neve: <input type="text" id="n5" value="e"> Ára: <input type="number" id="a5" value=5><br>
+        6. Termék neve: <input type="text" id="n6" value="f"> Ára: <input type="number" id="a6" value=2><br>
+      </p>
+    </div>
+
+    <div align="center"><button onclick="calcAll()">Eredmények megmutatása</button></div>
+
+    <div align="center"> 
+      <p class= "p_szines_pad" id="eredmenyek"></p>
+    </div>
+
+
+    <p class="disclaim" >Készítette:Balog Lea</p>
+  </body>
+</html>
